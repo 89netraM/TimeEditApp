@@ -3,14 +3,12 @@ using Terminal.Gui;
 
 namespace MoreTec.TimeEditApp
 {
-	class App : Window
+	class App : Toplevel
 	{
-		private const string WindowTitle = "TimeEditApp";
-
 		private readonly Menu menu = new Menu();
-		private readonly SearchView searchView = new SearchView();
+		private readonly MainWindow mainWindow = new MainWindow();
 
-		public App() : base(WindowTitle)
+		public App()
 		{
 			X = 0;
 			Y = 0;
@@ -18,7 +16,7 @@ namespace MoreTec.TimeEditApp
 			Height = Dim.Fill();
 
 			InitMenu();
-			InitSearchView();
+			InitMainWindow();
 		}
 
 		#region View Initialization
@@ -29,13 +27,13 @@ namespace MoreTec.TimeEditApp
 			menu.Exit += Menu_Exit;
 		}
 
-		private void InitSearchView()
+		private void InitMainWindow()
 		{
-			searchView.X = 0;
-			searchView.Y = 1;
-			searchView.Width = Dim.Fill();
-			searchView.Height = Dim.Fill(1);
-			this.Add(searchView);
+			mainWindow.X = 0;
+			mainWindow.Y = 1;
+			mainWindow.Width = Dim.Fill();
+			mainWindow.Height = Dim.Fill(1);
+			this.Add(mainWindow);
 		}
 
 		#endregion View Initialization
