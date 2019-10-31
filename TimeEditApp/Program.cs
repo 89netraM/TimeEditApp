@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Terminal.Gui;
 
 namespace MoreTec.TimeEditApp
 {
@@ -6,7 +6,8 @@ namespace MoreTec.TimeEditApp
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Application.Init();
+			Application.Run(new App());
 		}
 	}
 }
