@@ -42,16 +42,15 @@ namespace MoreTec.TimeEditApp.Views
 		{
 			searchButton.X = Pos.AnchorEnd(11);
 			searchButton.Y = 1;
-			searchButton.Width = 10;
 			searchButton.Clicked = Search;
 			this.Add(searchButton);
 		}
 
 		private void InitResultsView()
 		{
-			resultsFrame.X = 1;
+			resultsFrame.X = 0;
 			resultsFrame.Y = 3;
-			resultsFrame.Width = Dim.Fill(2);
+			resultsFrame.Width = Dim.Fill();
 			resultsFrame.Height = Dim.Fill();
 
 			resultsView.CanFocus = true;
