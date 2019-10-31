@@ -85,7 +85,7 @@ namespace MoreTec.TimeEditApp.Views
 		private async Task PerformSearch(string query)
 		{
 			IImmutableList<SearchItem> searchResults = await TimeEditWrapper.Search(query, 1);
-			IList searchList = searchResults.Select(x => x.Name).ToList();
+			IList searchList = searchResults.Select(x => $"{x.Name} ({x.Id})").ToList();
 
 			Application.MainLoop.Invoke(() =>
 			{
