@@ -12,8 +12,11 @@ namespace MoreTec.TimeEditApp.Views
 {
 	class SearchView : View
 	{
+		private const string reulstsTitle = "Search Results";
+
 		private readonly TextField searchField = new TextField("");
 		private readonly Button searchButton = new Button("Search");
+		private readonly FrameView resultsFrame = new FrameView(reulstsTitle);
 		private readonly ListView resultsView = new ListView();
 
 		public SearchView()
@@ -44,11 +47,15 @@ namespace MoreTec.TimeEditApp.Views
 
 		private void InitResultsView()
 		{
-			resultsView.X = 1;
-			resultsView.Y = 3;
-			resultsView.Width = Dim.Fill(2);
-			resultsView.Height = Dim.Fill(3);
-			this.Add(resultsView);
+			resultsFrame.X = 1;
+			resultsFrame.Y = 3;
+			resultsFrame.Width = Dim.Fill(2);
+			resultsFrame.Height = Dim.Fill();
+
+			resultsView.CanFocus = true;
+
+			resultsFrame.Add(resultsView);
+			this.Add(resultsFrame);
 		}
 
 		#endregion View Initialization
@@ -66,6 +73,7 @@ namespace MoreTec.TimeEditApp.Views
 			Application.MainLoop.Invoke(() =>
 			{
 				resultsView.SetSource(searchList);
+				resultsFrame.Title = reulstsTitle + " - " + query;
 			});
 		}
 	}
