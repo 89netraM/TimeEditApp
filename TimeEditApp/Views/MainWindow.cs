@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Terminal.Gui;
@@ -10,10 +10,12 @@ namespace MoreTec.TimeEditApp.Views
 		private const string WindowTitle = "TimeEditApp";
 
 		private readonly SearchView searchView = new SearchView();
+		private readonly ScheduleView scheduleView = new ScheduleView();
 
 		public MainWindow() : base(WindowTitle)
 		{
 			InitSearchView();
+			InitScheduleView();
 		}
 
 		#region View Initialization
@@ -27,6 +29,26 @@ namespace MoreTec.TimeEditApp.Views
 			this.Add(searchView);
 		}
 
+		private void InitScheduleView()
+		{
+			scheduleView.X = 0;
+			scheduleView.Y = 0;
+			scheduleView.Width = Dim.Fill();
+			scheduleView.Height = Dim.Fill();
+		}
+
 		#endregion View Initialization
+
+		public void ShowSearchView()
+		{
+			this.RemoveAll();
+			this.Add(searchView);
+		}
+
+		public void ShowScheduleView()
+		{
+			this.RemoveAll();
+			this.Add(scheduleView);
+		}
 	}
 }

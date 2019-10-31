@@ -25,6 +25,8 @@ namespace MoreTec.TimeEditApp
 		{
 			this.Add(menu);
 			menu.Exit += Menu_Exit;
+			menu.Search += Menu_Search;
+			menu.Schedule += Menu_Schedule;
 		}
 
 		private void InitMainWindow()
@@ -41,6 +43,16 @@ namespace MoreTec.TimeEditApp
 		private void Menu_Exit()
 		{
 			Running = false;
+		}
+
+		private void Menu_Search()
+		{
+			mainWindow.ShowSearchView();
+		}
+
+		private void Menu_Schedule()
+		{
+			mainWindow.ShowScheduleView();
 		}
 	}
 }
