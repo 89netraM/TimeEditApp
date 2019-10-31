@@ -70,7 +70,8 @@ namespace MoreTec.TimeEditApp.Views
 
 		public override bool ProcessColdKey(KeyEvent keyEvent)
 		{
-			if (keyEvent.Key == Key.Enter && resultsView.HasFocus && resultsView.SelectedItem >= 0 && resultsView.SelectedItem < searchItems.Count)
+			if (keyEvent.Key == Key.Enter && resultsView.HasFocus && searchItems != null &&
+				resultsView.SelectedItem >= 0 && resultsView.SelectedItem < searchItems.Count)
 			{
 				ItemSelected?.Invoke(searchItems[resultsView.SelectedItem]);
 
