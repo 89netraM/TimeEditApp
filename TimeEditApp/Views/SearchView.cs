@@ -2,9 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
@@ -19,6 +17,10 @@ namespace MoreTec.TimeEditApp.Views
 		private readonly FrameView resultsFrame = new FrameView(reulstsTitle);
 		private readonly ListView resultsView = new ListView();
 
+		private IImmutableList<SearchItem> searchItems;
+
+		public event Action<SearchItem> ItemSelected;
+
 		public SearchView()
 		{
 			InitSearchField();
@@ -32,7 +34,7 @@ namespace MoreTec.TimeEditApp.Views
 		{
 			searchField.X = 1;
 			searchField.Y = 1;
-			searchField.Width = Dim.Fill(13);
+			searchField.Width = Dim.Fill(12);
 			this.Add(searchField);
 		}
 
@@ -53,6 +55,7 @@ namespace MoreTec.TimeEditApp.Views
 			resultsFrame.Height = Dim.Fill();
 
 			resultsView.CanFocus = true;
+			resultsView.AllowsMarking = true;
 
 			resultsFrame.Add(resultsView);
 			this.Add(resultsFrame);
@@ -65,13 +68,28 @@ namespace MoreTec.TimeEditApp.Views
 			Task.Run(() => PerformSearch(searchField.Text.ToString()));
 		}
 
+		public override bool ProcessColdKey(KeyEvent keyEvent)
+		{
+			if (keyEvent.Key == Key.Enter && resultsView.HasFocus && resultsView.SelectedItem >= 0 && resultsView.SelectedItem < searchItems.Count)
+			{
+				ItemSelected?.Invoke(searchItems[resultsView.SelectedItem]);
+
+				return true;
+			}
+			else
+			{
+				return base.ProcessColdKey(keyEvent);
+			}
+		}
+
 		private async Task PerformSearch(string query)
 		{
 			IImmutableList<SearchItem> searchResults = await TimeEditWrapper.Search(query, 1);
-			IList searchList = searchResults.Select(x => $"{x.Name} ({x.Id})").ToList();
+			IList searchList = searchResults.Select(x => x.Name).ToList();
 
 			Application.MainLoop.Invoke(() =>
 			{
+				searchItems = searchResults;
 				resultsView.SetSource(searchList);
 				resultsFrame.Title = reulstsTitle + " - " + query;
 			});
