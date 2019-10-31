@@ -1,7 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MoreTec.TimeEditApi;
+using System;
+using System.Collections;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Terminal.Gui;
 
 namespace MoreTec.TimeEditApp.Views
@@ -43,7 +47,7 @@ namespace MoreTec.TimeEditApp.Views
 			resultsView.X = 1;
 			resultsView.Y = 3;
 			resultsView.Width = Dim.Fill(2);
-			resultsView.Height = Dim.Fill(7);
+			resultsView.Height = Dim.Fill(3);
 			this.Add(resultsView);
 		}
 
@@ -51,7 +55,18 @@ namespace MoreTec.TimeEditApp.Views
 
 		private void Search()
 		{
+			Task.Run(() => PerformSearch(searchField.Text.ToString()));
+		}
 
+		private async Task PerformSearch(string query)
+		{
+			IImmutableList<SearchItem> searchResults = await TimeEditWrapper.Search(query, 1);
+			IList searchList = searchResults.Select(x => $"{x.Name} ({x.Id})").ToList();
+
+			Application.MainLoop.Invoke(() =>
+			{
+				resultsView.SetSource(searchList);
+			});
 		}
 	}
 }
