@@ -42,15 +42,15 @@ namespace MoreTec.TimeEditApp.Views
 		{
 			idField.X = 1;
 			idField.Y = 1;
-			idField.Width = Dim.Fill(11);
+			idField.Width = Dim.Fill(12);
 			this.Add(idField);
 		}
 
 		private void InitSearchButton()
 		{
-			fetchButton.X = Pos.AnchorEnd(10);
+			fetchButton.X = Pos.AnchorEnd(11);
 			fetchButton.Y = 1;
-			fetchButton.Width = 9;
+			fetchButton.Width = 10;
 			fetchButton.Clicked = Fetch;
 			this.Add(fetchButton);
 		}
@@ -113,6 +113,7 @@ namespace MoreTec.TimeEditApp.Views
 		public void DisplaySchedule(int scheduleId)
 		{
 			Task.Run(() => DoFetch(scheduleId));
+			idField.Text = scheduleId.ToString();
 		}
 
 		private async Task DoFetch(int scheduleId)

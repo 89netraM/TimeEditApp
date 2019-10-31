@@ -15,8 +15,10 @@ namespace MoreTec.TimeEditApp.Views
 
 		public MainWindow() : base(WindowTitle)
 		{
-			InitSearchView();
 			InitScheduleView();
+			InitSearchView();
+
+			ShowSearchView();
 		}
 
 		#region View Initialization
@@ -37,20 +39,31 @@ namespace MoreTec.TimeEditApp.Views
 			scheduleView.Y = 0;
 			scheduleView.Width = Dim.Fill();
 			scheduleView.Height = Dim.Fill();
+			this.Add(scheduleView);
 		}
 
 		#endregion View Initialization
 
 		public void ShowSearchView()
 		{
-			this.RemoveAll();
+			scheduleView.CanFocus = false;
+			this.Remove(searchView);
 			this.Add(searchView);
+			searchView.CanFocus = true;
+			searchView.FocusFirst();
+
+			Title = WindowTitle + " - Search";
 		}
 
 		public void ShowScheduleView()
 		{
-			this.RemoveAll();
+			searchView.CanFocus = false;
+			this.Remove(scheduleView);
 			this.Add(scheduleView);
+			scheduleView.CanFocus = true;
+			scheduleView.FocusFirst();
+
+			Title = WindowTitle + " - Schedule";
 		}
 
 		private void SearchView_ItemSelected(SearchItem item)
