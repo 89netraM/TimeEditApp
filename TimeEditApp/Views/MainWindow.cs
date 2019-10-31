@@ -1,3 +1,4 @@
+using MoreTec.TimeEditApi;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,6 +27,7 @@ namespace MoreTec.TimeEditApp.Views
 			searchView.Y = 0;
 			searchView.Width = Dim.Fill();
 			searchView.Height = Dim.Fill();
+			searchView.ItemSelected += SearchView_ItemSelected;
 			this.Add(searchView);
 		}
 
@@ -49,6 +51,12 @@ namespace MoreTec.TimeEditApp.Views
 		{
 			this.RemoveAll();
 			this.Add(scheduleView);
+		}
+
+		private void SearchView_ItemSelected(SearchItem item)
+		{
+			ShowScheduleView();
+			scheduleView.DisplaySchedule(item.Id);
 		}
 	}
 }
