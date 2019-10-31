@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <StartupObject></StartupObject>
+    <Authors>Mårten Åsberg</Authors>
+    <Company>MoreTec</Company>
+    <RootNamespace>MoreTec.TimeEditApp</RootNamespace>
+    <AssemblyName>MoreTec.TimeEditApp</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Terminal.Gui" Version="0.24.0" />
+    <PackageReference Include="TimeEditApi" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
