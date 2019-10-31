@@ -128,6 +128,8 @@ namespace MoreTec.TimeEditApp.Views
 
 					IList<DateTime> dates = GetDates();
 					SelectDate(dates);
+
+					dateListView.FocusFirst();
 				}
 				else
 				{

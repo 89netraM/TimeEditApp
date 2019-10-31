@@ -93,6 +93,8 @@ namespace MoreTec.TimeEditApp.Views
 				searchItems = searchResults;
 				resultsView.SetSource(searchList);
 				resultsFrame.Title = reulstsTitle + " - " + query;
+
+				resultsView.FocusFirst();
 			});
 		}
 	}
